@@ -1,0 +1,11 @@
+CREATE TABLE organization (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255),
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE EXTENSION moddatetime;
+
+CREATE TRIGGER organization_modified BEFORE UPDATE ON organization
+FOR EACH ROW EXECUTE PROCEDURE moddatetime (modified);
