@@ -9,7 +9,9 @@ services:
     command: bash -c "python /code/initial_db.py && tail -f /dev/null"
 
   db:
-    build: .
+    image: postgres
+    env_file:
+      database.env
     volumes:
       - ./database-init:/docker-entrypoint-initdb.d
       - database-data:/var/lib/postgresql/data
