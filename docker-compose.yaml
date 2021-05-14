@@ -1,17 +1,17 @@
 version: "3.8"
 services:
   python:
-    build: ./python
+    build: .
     depends_on:
       - db
     volumes:
-      - ./python/code:/code
+      - ./code:/code
     command: bash -c "python /code/initial_db.py && tail -f /dev/null"
 
   db:
     image: postgres
     env_file:
-      database.env
+      code/database.env
     volumes:
       - ./database-init:/docker-entrypoint-initdb.d
       - database-data:/var/lib/postgresql/data
