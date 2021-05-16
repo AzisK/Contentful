@@ -2,7 +2,7 @@
 
 ## Setup
 
-Make sure to have 
+Make sure to have
 - Docker and Docker Compose installed
 - Docker running
 
