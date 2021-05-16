@@ -12,15 +12,15 @@ CREATE EXTENSION moddatetime;
 CREATE TRIGGER organization_modified BEFORE UPDATE ON organization
 FOR EACH ROW EXECUTE PROCEDURE moddatetime (modified);
 
--- User
+-- App user
 
-CREATE TABLE user (
+CREATE TABLE app_user (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE NOT NULL,
-    plan_name VARCAHR(255) NOT NULL,
+    plan_name VARCHAR(255) NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     current BOOLEAN NOT NULL,
@@ -28,14 +28,14 @@ CREATE TABLE user (
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
--- User
+-- Active user count
 
 CREATE TABLE user_active_count (
     date DATE PRIMARY KEY,
     count VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE NOT NULL,
-    plan_name VARCAHR(255) NOT NULL,
+    plan_name VARCHAR(255) NOT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -49,7 +49,7 @@ CREATE TABLE user_event (
     user_email VARCHAR(255) NOT NULL,
     user_type VARCHAR(255) NOT NULL,
     organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE NOT NULL,
-    plan_name VARCAHR(255) NOT NULL,
+    plan_name VARCHAR(255) NOT NULL,
     received_at TIMESTAMP NOT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
