@@ -8,10 +8,26 @@ def parse_args():
     return args
 
 
-def command_line():
-    args = parse_args()
-    print(args)
+class Etl:
+    def __init__(self, args):
+        self.date = args.date
+
+    def execute(self):
+        print(
+            "Hi, 'execute' has not been specified, I am simply printing this message."
+        )
+
+
+class CommandLine:
+    etl_class = Etl
+
+    def __init__(self):
+        args = parse_args()
+        self.etl = self.etl_class(args)
+
+    def command(self):
+        self.etl.execute()
 
 
 if __name__ == "__main__":
-    command_line()
+    CommandLine().command()
