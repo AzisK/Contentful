@@ -1,4 +1,7 @@
 import argparse
+import datetime
+
+DATE_FORMAT = "%Y-%m-%d"
 
 
 def parse_args():
@@ -6,6 +9,13 @@ def parse_args():
     parser.add_argument("date", help="Date of the ETL run")
     args = parser.parse_args()
     return args
+
+
+def validate_args(args):
+    try:
+        datetime.datetime.strptime(args.date, DATE_FORMAT)
+    except ValueError:
+        raise Exception("Date format is incorrect. It should be YYYY-MM-DD.")
 
 
 class Etl:
@@ -23,6 +33,7 @@ class CommandLine:
 
     def __init__(self):
         args = parse_args()
+        validate_args(args)
         self.etl = self.etl_class(args)
 
     def command(self):
