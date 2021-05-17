@@ -6,7 +6,6 @@ from database import print_results
 from etl import CommandLine
 from etl import Etl
 
-
 USER_EVENTS_JSON = "user_events.json"
 USER_EVENTS_TABLE = "user_event"
 TIMESTAMP_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
