@@ -1,25 +1,12 @@
 from enum import Enum
 import json
-import os
 
-from dotenv import load_dotenv
-from sqlalchemy import create_engine
+from database import execute
+from database import print_results
 
-load_dotenv("database.env")
-
-DB_USER = os.getenv("POSTGRES_USER")
-DB_PASSWORD = os.getenv("POSTGRES_PASSWORD")
-DB_NAME = os.getenv("POSTGRES_DB")
-DB_HOST = "db"
-DB_PORT = "5432"
-INITIAL_ORGANIZATIONS_JSON = "initial_organizations.json"
-ORGANIZATIONS_TABLE = "organization"
 TABLE_STATUS_TABLE = "init_table_by_python"
-
-DB_STRING = "postgresql://{}:{}@{}:{}/{}".format(
-    DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
-)
-DB = create_engine(DB_STRING)
+ORGANIZATIONS_TABLE = "organization"
+INITIAL_ORGANIZATIONS_JSON = "initial_organizations.json"
 
 
 class TABLE_STATUS(Enum):
@@ -76,12 +63,6 @@ def init_tables():
     print_results(results)
 
 
-def execute(query):
-    with DB.connect() as connection:
-        print(f"Executing\n{query}")
-        return connection.execute(query)
-
-
 def get_initial_data():
     jsons = read_data()
     tuples = [
@@ -95,11 +76,6 @@ def read_data():
     with open(INITIAL_ORGANIZATIONS_JSON) as file:
         data = json.load(file)
     return data
-
-
-def print_results(results):
-    for r in results:
-        print(r)
 
 
 if __name__ == "__main__":

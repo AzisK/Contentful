@@ -28,6 +28,9 @@ CREATE TABLE app_user (
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
+CREATE TRIGGER app_user_modified BEFORE UPDATE ON app_user
+FOR EACH ROW EXECUTE PROCEDURE moddatetime (modified);
+
 -- Active user count
 
 CREATE TABLE user_active_count (
@@ -43,17 +46,21 @@ CREATE TABLE user_active_count (
 -- User events
 
 CREATE TABLE user_event (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(255) NOT NULL,
     event_type VARCHAR(255) NOT NULL,
-    user_name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     user_email VARCHAR(255) NOT NULL,
     user_type VARCHAR(255) NOT NULL,
     organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE NOT NULL,
-    plan_name VARCHAR(255) NOT NULL,
+    plan_name VARCHAR(255),
     received_at TIMESTAMP NOT NULL,
+    date DATE NOT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
+
+CREATE TRIGGER user_event_modified BEFORE UPDATE ON user_event
+FOR EACH ROW EXECUTE PROCEDURE moddatetime (modified);
 
 -- Table initialization by Python status
 
