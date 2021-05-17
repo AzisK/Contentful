@@ -15,7 +15,7 @@ FOR EACH ROW EXECUTE PROCEDURE moddatetime (modified);
 -- App user
 
 CREATE TABLE app_user (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
@@ -48,10 +48,10 @@ CREATE TABLE user_active_count (
 CREATE TABLE user_event (
     id VARCHAR(255) NOT NULL,
     event_type VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
-    user_email VARCHAR(255) NOT NULL,
-    user_type VARCHAR(255) NOT NULL,
-    organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE NOT NULL,
+    username VARCHAR(255),
+    user_email VARCHAR(255),
+    user_type VARCHAR(255),
+    organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE,
     plan_name VARCHAR(255),
     received_at TIMESTAMP NOT NULL,
     date DATE NOT NULL,

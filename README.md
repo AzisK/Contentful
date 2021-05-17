@@ -14,6 +14,10 @@ Make sure to have
 
 `docker exec -it datengineering_python_1 bash`
 
+## Run an ETL in Python container
+
+`python etl_user_events.py 2020-12-08`
+
 ## Look at database via Adminer
 
 `http://localhost:8080/?pgsql=db&username=user&db=db&ns=public`
