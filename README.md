@@ -12,7 +12,7 @@ Make sure to have
 
 ## Connect to Python container
 
-`docker exec -it datengineering_python_1 bash`
+`docker exec -it datengineering_python_1 bash`. Python code can be executed from inside Python container.
 
 ## ETLs in repository
 
