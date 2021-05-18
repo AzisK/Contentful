@@ -14,9 +14,16 @@ Make sure to have
 
 `docker exec -it datengineering_python_1 bash`
 
+## ETLs in repository
+
+Repo consists of 3 ETLs.
+1. `etl_user_events.py` ETL should be loaded first since other calculations depend on it
+2. `etl_users.py` can be loaded after 1
+3. `etl_user_active_count` can be loaded after 1
+
 ## Run an ETL in Python container
 
-`python etl_user_events.py 2020-12-08`
+At the moment there is data for dates from 2020-12-05 to 2020-12-11. Run an ETL for a day like this `python etl_user_events.py 2020-12-08`
 
 ## Look at database via Adminer
 

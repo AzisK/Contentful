@@ -15,15 +15,15 @@ FOR EACH ROW EXECUTE PROCEDURE moddatetime (modified);
 -- App user
 
 CREATE TABLE app_user (
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    type VARCHAR(255) NOT NULL,
-    organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE NOT NULL,
-    plan_name VARCHAR(255) NOT NULL,
+    id VARCHAR(255),
+    status VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    type VARCHAR(255),
+    organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE,
+    plan_name VARCHAR(255),
+    received_at TIMESTAMP NOT NULL,
     start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    current BOOLEAN NOT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -36,9 +36,6 @@ FOR EACH ROW EXECUTE PROCEDURE moddatetime (modified);
 CREATE TABLE user_active_count (
     date DATE PRIMARY KEY,
     count VARCHAR(255) NOT NULL,
-    type VARCHAR(255) NOT NULL,
-    organization_name VARCHAR(255) REFERENCES organization(name) ON DELETE CASCADE NOT NULL,
-    plan_name VARCHAR(255) NOT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
