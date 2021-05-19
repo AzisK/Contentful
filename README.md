@@ -19,7 +19,7 @@ Make sure to have
 Repo consists of 3 ETLs.
 1. `etl_user_events.py` ETL should be loaded first since other calculations depend on it
 2. `etl_users.py` can be loaded after 1
-3. `etl_user_active_count` can be loaded after 1
+3. `etl_user_active_count.py` can be loaded after 1
 
 ## Run an ETL in Python container
 
