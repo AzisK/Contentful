@@ -41,18 +41,25 @@ class UserEventsEtl(Etl):
             execute(f"DELETE FROM {USER_EVENTS_TABLE} WHERE date = '{self.date}'")
 
         tuples = self.map_to_database(data_today)
-        insert_records = self.tuples_to_str(tuples)
+        insert_str = self.insert_str(tuples)
         query = f"""
         INSERT INTO {self.table}
             (id, event_type, username, user_email, user_type, organization_name, plan_name, received_at, date)
             VALUES
-            {f",{NEW_LINE}".join(insert_records)}
+            {insert_str}
         RETURNING *;
         """
         results = execute(query)
         print_results(results)
 
-    def tuples_to_str(self, tuples):
+    @classmethod
+    def insert_str(cls, tuples):
+        insert_records = cls.tuples_to_str(tuples)
+        insert_str = f",{NEW_LINE}".join(insert_records)
+        return insert_str
+
+    @staticmethod
+    def tuples_to_str(tuples):
         tuples_to_str = []
         for t in tuples:
             tuple_to_str = ",".join([f"'{f}'" if f else "NULL" for f in t])

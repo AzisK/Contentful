@@ -25,6 +25,10 @@ Repo consists of 3 ETLs.
 
 At the moment there is data for dates from 2020-12-05 to 2020-12-11. Run an ETL for a day like this `python etl_user_events.py 2020-12-08`
 
+## Run tests inside Python container
+
+`python -m pytest`
+
 ## Look at database via Adminer
 
 `http://localhost:8080/?pgsql=db&username=user&db=db&ns=public`
